@@ -9,9 +9,11 @@ public class GamblingSimulatorMain {
         int totalGamesPlayed = 0;
         int totalGamesWon = 0;
         int totalAmountWon = 0;
+        int daysWon = 0;
+        int daysLost = 0;
         Random rand = new Random();
 
-        while (daysPlayed < 20) {
+        while (daysPlayed < 30) {
             int stake = startingStake;
             int gamesPlayed = 0;
             int gamesWon = 0;
@@ -30,11 +32,20 @@ public class GamblingSimulatorMain {
             }
             int amountWon = (gamesWon * bet) - (gamesPlayed - gamesWon) * bet;
             totalAmountWon += amountWon;
+
+            if (amountWon > 0) {
+                daysWon++;
+            } else {
+                daysLost++;
+            }
+
             System.out.println("Day " + (daysPlayed + 1) + ": Games played = " + gamesPlayed + ", Games won = " + gamesWon + ", Amount won = $" + amountWon);
             daysPlayed++;
         }
         System.out.println("Total games played: " + totalGamesPlayed);
         System.out.println("Total games won: " + totalGamesWon);
         System.out.println("Total amount won or lost: $" + totalAmountWon);
+        System.out.println("Days won: " + daysWon);
+        System.out.println("Days lost: " + daysLost);
     }
 }

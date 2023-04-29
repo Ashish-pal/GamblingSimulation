@@ -11,6 +11,10 @@ public class GamblingSimulatorMain {
         int totalAmountWon = 0;
         int daysWon = 0;
         int daysLost = 0;
+        int luckiestDay = 0;
+        int unluckiestDay = 0;
+        int maxAmountWon = Integer.MIN_VALUE;
+        int minAmountWon = Integer.MAX_VALUE;
         Random rand = new Random();
 
         while (daysPlayed < 30) {
@@ -30,6 +34,7 @@ public class GamblingSimulatorMain {
                     stake -= bet;
                 }
             }
+
             int amountWon = (gamesWon * bet) - (gamesPlayed - gamesWon) * bet;
             totalAmountWon += amountWon;
 
@@ -37,6 +42,15 @@ public class GamblingSimulatorMain {
                 daysWon++;
             } else {
                 daysLost++;
+            }
+
+            if (amountWon > maxAmountWon) {
+                maxAmountWon = amountWon;
+                luckiestDay = daysPlayed + 1;
+            }
+            if (amountWon < minAmountWon) {
+                minAmountWon = amountWon;
+                unluckiestDay = daysPlayed + 1;
             }
 
             System.out.println("Day " + (daysPlayed + 1) + ": Games played = " + gamesPlayed + ", Games won = " + gamesWon + ", Amount won = $" + amountWon);
@@ -47,5 +61,7 @@ public class GamblingSimulatorMain {
         System.out.println("Total amount won or lost: $" + totalAmountWon);
         System.out.println("Days won: " + daysWon);
         System.out.println("Days lost: " + daysLost);
+        System.out.println("Luckiest day: Day " + luckiestDay + " (Amount won: $" + maxAmountWon + ")");
+        System.out.println("Unluckiest day: Day " + unluckiestDay + " (Amount lost: $" + minAmountWon + ")");
     }
 }

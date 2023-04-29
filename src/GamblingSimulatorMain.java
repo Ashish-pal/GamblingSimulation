@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class GamblingSimulatorMain {
     public static void main(String[] args) {
@@ -16,13 +17,14 @@ public class GamblingSimulatorMain {
         int maxAmountWon = Integer.MIN_VALUE;
         int minAmountWon = Integer.MAX_VALUE;
         Random rand = new Random();
+        Scanner sc = new Scanner(System.in);
 
         while (daysPlayed < 30) {
             int stake = startingStake;
             int gamesPlayed = 0;
             int gamesWon = 0;
 
-            while (stake > 0 && stake < 200 && stake > 50 && stake < 150) {
+            while (stake > 0 && stake < 1000) {
                 gamesPlayed++;
                 totalGamesPlayed++;
                 boolean win = rand.nextBoolean();
@@ -55,6 +57,15 @@ public class GamblingSimulatorMain {
 
             System.out.println("Day " + (daysPlayed + 1) + ": Games played = " + gamesPlayed + ", Games won = " + gamesWon + ", Amount won = $" + amountWon);
             daysPlayed++;
+
+            if (totalAmountWon > 500) {
+                System.out.println("Congratulations! You have won more than $500. Do you want to continue playing for the next month? (y/n)");
+                String input = sc.nextLine();
+                if (input.equalsIgnoreCase("n")) {
+                    break;
+                }
+                totalAmountWon = 0;
+            }
         }
         System.out.println("Total games played: " + totalGamesPlayed);
         System.out.println("Total games won: " + totalGamesWon);

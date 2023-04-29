@@ -9,7 +9,7 @@ public class GamblingSimulatorMain {
         int gamesWon = 0;
         Random rand = new Random();
 
-        while (stake > 0 && stake < 200) {
+        while (stake > 0 && stake < 200 && stake > 50 && stake < 150)  {
             gamesPlayed++;
             boolean win = rand.nextBoolean();
             if (win) {
